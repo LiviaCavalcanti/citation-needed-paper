@@ -25,10 +25,28 @@ An example input file is provided in *test_input_data_sample.txt*
 - **'-s', '--sections'**, is the path to the vocabulary of section with which we trained our model.
 - **'-l', '--lang'**, is the language that we are parsing now, e.g. "en", or "it".
 
+#### Seeing classification for any page
 
+If you run the previous code and saved the `.pck` in the `embeddings` folder, you can run the classification model for any generic Wikipedia page title by running:
+```
+python fetchPageData.py -n WIPEDIA_PAGE_TITLE
+```
+changing WIPEDIA_PAGE_TITLE for the page name you want to classify. If you prefer you can specify the files location just like before. For instance:
+```
+python fetchPageData.py -n Hesse -models models/fa_en_model_rnn_attention_section.h5 -v embeddings/word_dict_en.pck -s embeddings/section_dict_en.pck
+```
+
+To do so, you have to, at first, use a different virtual environment with `page_requirements.txt` installed. For instance:
+```
+$ virtualenv page_env -p python3 
+$ source page_env/bin/activate
+$ pip install -r page_requirements.txt
+```
+Obs.: Unlike previous script, `fetchPageData.py` uses Python 3.
 
 #### Models and Data
 The _models_ folder contains the links to the citation need models for _English_, _French_, and _Italian_ Wikipedias, trained on a large corpus of Wikipedia's Featured Articles. The training data for these articles, as well as more training data for other models described in the paper can be found in the _training_data_ folder.
+
 
 ### Data about citation reason and qualitative analysis
 In the paper, we have more data about the qualitative analysis to identify a taxonomy of reasons for adding citations.
